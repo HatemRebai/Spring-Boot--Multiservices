@@ -1,5 +1,9 @@
 package com.example.demo.service;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,7 +17,8 @@ public class UserServiceImpl implements UserService{
 
 	@Autowired
 	UserRepository userrepository;
-	
+	@PersistenceContext
+	EntityManager em;
 	
 	@Override
 	public void saveUser(Client user) {
@@ -25,6 +30,15 @@ public class UserServiceImpl implements UserService{
 	@Override
 	public void saveOuvrier(Ouvrier user) {
 		userrepository.save(user);
+		
+	}
+	
+	@Override
+	public User loadByUsername(String username) {
+		
+		TypedQuery<User> query = (TypedQuery<User>) em.createQuery("SELECT u FROM User u WHERE u.username = :username" ,User.class);
+		User u=query.setParameter("username", username).getSingleResult();
+			return  u;
 		
 	}
 

@@ -9,6 +9,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import com.example.demo.config.BCryptManagerUtil;
+
 @Entity
 public class User implements Serializable {
 	
@@ -28,16 +30,20 @@ public class User implements Serializable {
 	}
 	
 	
-	
 
-
+	public User(String username, String password, String adresse) {
+		super();
+		this.username = username;
+		this.password = BCryptManagerUtil.passwordEncoder().encode(password);
+		Adresse = adresse;
+	}
 
 
 	public User(int id, String username, String password, String adresse, String tel, Role role) {
 		super();
 		this.id = id;
 		this.username = username;
-		this.password = password;
+		this.password = BCryptManagerUtil.passwordEncoder().encode(password);
 		Adresse = adresse;
 		this.tel = tel;
 		this.role = role;
@@ -109,7 +115,15 @@ public class User implements Serializable {
 		return password;
 	}
 	public void setPassword(String password) {
-		this.password = password;
+		this.password = BCryptManagerUtil.passwordEncoder().encode(password);
+	}
+
+
+
+	@Override
+	public String toString() {
+		return "{id:" + id + ", username:" + username + ", Adresse:" + Adresse + ", tel:" + tel + ", role:" + role
+				+ "}";
 	}
 	
 	
