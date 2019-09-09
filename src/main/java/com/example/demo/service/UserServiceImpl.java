@@ -39,7 +39,5 @@ public class UserServiceImpl implements UserService{
 		TypedQuery<User> query = (TypedQuery<User>) em.createQuery("SELECT u FROM User u WHERE u.username = :username" ,User.class);
 		User u=query.setParameter("username", username).getSingleResult();
 			return  u;
-		
 	}
-
 }

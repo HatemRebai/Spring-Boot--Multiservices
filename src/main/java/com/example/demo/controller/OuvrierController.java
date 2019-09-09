@@ -9,20 +9,20 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 import com.example.demo.entities.Ouvrier;
-import com.example.demo.service.EmployService;
+import com.example.demo.service.OuvrierService;
 
 @CrossOrigin("*")
 @RestController
-@RequestMapping("/employ")
-public class EmpolController {
+@RequestMapping("/ouvrier")
+public class OuvrierController {
 	
 	@Autowired
-	EmployService employservice;
+	OuvrierService ouvrierservice;
 	
-	@RequestMapping(value="/add",method=RequestMethod.POST)
+	/*@RequestMapping(value="/addouvrier",method=RequestMethod.POST)
 	public void saveUser(@RequestBody Ouvrier emp) {
-		employservice.saveUser(emp);
+		ouvrierservice.saveUser(emp);
 		
-	}
+	}*/
 
 }

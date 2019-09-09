@@ -3,9 +3,9 @@ package com.example.demo.repositories;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.example.demo.entities.Ouvrier;
+import com.example.demo.entities.Services;
 
-@Repository("employrepository")
-public interface EmploRepository extends JpaRepository<Ouvrier, Integer> {
+@Repository("servicesrepository")
+public interface ServicesRepository extends JpaRepository<Services, Integer> {
 
 }

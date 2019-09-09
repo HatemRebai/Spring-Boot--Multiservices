@@ -4,95 +4,27 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 
 public class Ouvrier extends User implements Serializable {
-	
-	
-
-
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	
-	private int Moyenne=0;
+	private float Moyenne;
 	private Typedouvrier type;
 	
-	@OneToMany(mappedBy="employee")
-	private List<Service> servicelist =new ArrayList<Service>();
-	
-	
-	
+	@OneToMany(mappedBy="ouvrier", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	private List<Services> service = new ArrayList<Services>();
 
+		
+	@OneToMany(mappedBy="ouvriers", cascade = CascadeType.ALL)
+	@JsonIgnore
+	private List<Comments> comments = new ArrayList<Comments>();
 
-	public Ouvrier() {
-		super();
-		// TODO Auto-generated constructor stub
 	}
-
-
-	public int getMoyenne() {
-		return Moyenne;
-	}
-
-
-	public void setMoyenne(int moyenne) {
-		Moyenne = moyenne;
-	}
-
-
-
-	
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-	public Ouvrier(int moyenne, Typedouvrier type, List<Service> servicelist) {
-		super();
-		Moyenne = moyenne;
-		this.type = type;
-		this.servicelist = servicelist;
-	}
-
-
-
-
-	public Typedouvrier getType() {
-		return type;
-	}
-
-
-	public void setType(Typedouvrier type) {
-		this.type = type;
-	}
-
-
-	public List<Service> getServicelist() {
-		return servicelist;
-	}
-
-
-	public void setServicelist(List<Service> servicelist) {
-		this.servicelist = servicelist;
-	}
-
-
-	
-	
-	
-
-}
