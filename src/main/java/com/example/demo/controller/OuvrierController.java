@@ -19,10 +19,10 @@ public class OuvrierController {
 	@Autowired
 	OuvrierService ouvrierservice;
 	
-	/*@RequestMapping(value="/addouvrier",method=RequestMethod.POST)
+	@RequestMapping(value="/addouvrier",method=RequestMethod.POST)
 	public void saveUser(@RequestBody Ouvrier emp) {
 		ouvrierservice.saveUser(emp);
 		
-	}*/
+	}
 
 }

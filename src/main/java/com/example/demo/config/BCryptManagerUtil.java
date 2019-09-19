@@ -18,4 +18,11 @@ public class BCryptManagerUtil {
 	public static PasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
 	}
+
+	/**
+	 * @return the passwordEncoder
+	 */
+	public PasswordEncoder getPasswordEncoder() {
+		return passwordEncoder;
+	}
 }

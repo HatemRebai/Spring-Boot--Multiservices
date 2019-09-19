@@ -1,5 +1,6 @@
 package com.example.demo.service;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.example.demo.entities.Services;
@@ -20,4 +21,17 @@ public class ServicesServiceImpl  implements ServicesService{
 		servicesrepository.save(services);
 	}
 
+	public void deleteservices(Integer id) {
+		Services services =  servicesrepository.getOne(id);
+		servicesrepository.delete(services);
+	}
+
+
+	@Override
+	public void updateservices(Services services) {
+		// TODO Auto-generated method stub
+		servicesrepository.save(services);
+
+	}
+	
 }

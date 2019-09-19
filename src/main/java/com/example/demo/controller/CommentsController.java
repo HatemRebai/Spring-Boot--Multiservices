@@ -33,13 +33,6 @@ public class CommentsController {
 	@Autowired
 	OuvrierRepository ouvrierrepository;
 	
-	/*@RequestMapping(value="/commouvr/{idcomments}/{idouvrier}",method =RequestMethod.POST)
-
-    public void commouvr(@PathVariable("idcomments")Integer idcomments,@PathVariable("idouvrier") Integer idouvrier) {
-    	
-		commentsservice.commouvr(idcomments, idouvrier);
-    	}*/
-
 	 @RequestMapping(value = "/addcommentsou/{idouvrier}", method = RequestMethod.POST)
 		public void commouvr(@RequestBody Comments comments,@PathVariable("idouvrier") Integer idouvrier) {
 		 Ouvrier ouvrier =ouvrierrepository.getOne(idouvrier);

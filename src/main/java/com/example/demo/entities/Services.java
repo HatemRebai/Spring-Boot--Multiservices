@@ -103,8 +103,5 @@ public class Services implements Serializable {
 		}
 
 
-		public static long getSerialversionuid() {
-			return serialVersionUID;
-		}
 
 	}
