@@ -3,9 +3,7 @@ package com.example.demo.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.demo.entities.Client;
 import com.example.demo.entities.Comments;
-import com.example.demo.entities.Ouvrier;
 import com.example.demo.repositories.ClientRepository;
 import com.example.demo.repositories.CommentsRepository;
 import com.example.demo.repositories.OuvrierRepository;
@@ -22,7 +20,7 @@ public class CommentsServiceImpl  implements CommentsService{
 	ClientRepository clientrepository;
 	@Override
 
-	public void commouvr(Comments comments) {
+	public void commouvr(Comments comments, Integer idouvrier) {
 		commentsrepository.save(comments);
 
 		/*Comments comments = commentsrepository.getOne(idcomments);

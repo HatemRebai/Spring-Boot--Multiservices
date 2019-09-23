@@ -41,7 +41,6 @@ public class CommentsController {
 	 }
 
 	
-	
 	 @RequestMapping(value = "/addcommentscli/{idclient}", method = RequestMethod.POST)
 		public void savecomments(@RequestBody Comments comments,@PathVariable("idclient") Integer idclient) {
 		 Client client = clientrepository.getOne(idclient);

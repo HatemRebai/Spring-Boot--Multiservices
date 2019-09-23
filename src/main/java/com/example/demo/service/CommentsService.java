@@ -4,6 +4,6 @@ import com.example.demo.entities.Comments;
 
 public interface CommentsService {
 
-	public void commouvr(Comments comments);
+	public void commouvr(Comments comments, Integer idouvrier);
 	public void savecomments(Comments comments);
 }
