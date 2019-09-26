@@ -1,5 +1,7 @@
 package com.example.demo.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,8 +17,24 @@ public class OuvrierServiceImpl implements OuvrierService {
 	
 	@Override
 	public void saveUser(Ouvrier ouvrier) {
-	
 		ouvrierrepository.save(ouvrier);
+	}
+
+	@Override
+	public void suppouvrier(Ouvrier ouvrier) {
+		ouvrierrepository.delete(ouvrier);
+	}
+
+	@Override
+	public Ouvrier getouvrierById(Integer id) {
+		ouvrierrepository.getOne(id);
+		return null;
+	}
+
+	@Override
+	public List<Ouvrier> getall() {
+		// TODO Auto-generated method stub
+		return ouvrierrepository.findAll();
 	}
 
 }
