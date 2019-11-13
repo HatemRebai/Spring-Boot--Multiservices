@@ -27,8 +27,7 @@ public class OuvrierServiceImpl implements OuvrierService {
 
 	@Override
 	public Ouvrier getouvrierById(Integer id) {
-		ouvrierrepository.getOne(id);
-		return null;
+		return	ouvrierrepository.getOne(id);
 	}
 
 	@Override

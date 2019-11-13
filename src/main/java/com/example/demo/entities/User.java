@@ -18,69 +18,53 @@ public class User implements Serializable {
 	private int id;
 	private String username;
 	private String password;
-	private String Adresse;
+	private String adresse;
 	private String tel;
-	
+	private String email;
 	private Role role;
 	public User() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 	
-	
-
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
 	public User(String username, String password, String adresse) {
 		super();
 		this.username = username;
 		this.password = BCryptManagerUtil.passwordEncoder().encode(password);
-		Adresse = adresse;
+		this.adresse = adresse;
 	}
-
-
-	public User(int id, String username, String password, String adresse, String tel, Role role) {
+	public User(int id, String username, String password, String adresse, String tel, Role role, String email) {
 		super();
 		this.id = id;
 		this.username = username;
 		this.password = BCryptManagerUtil.passwordEncoder().encode(password);
-		Adresse = adresse;
+		this.adresse = adresse;
 		this.tel = tel;
+		this.email = email;
 		this.role = role;
 	}
-
-
-
-
-
-
-
 	public Role getRole() {
 		return role;
 	}
-
-
-
-
-
-
 
 	public void setRole(Role role) {
 		this.role = role;
 	}
 
-
-
-
-
-
-
 	public String getAdresse() {
-		return Adresse;
+		return adresse;
 	}
 
 
 
 	public void setAdresse(String adresse) {
-		Adresse = adresse;
+		this.adresse = adresse;
 	}
 
 
@@ -89,13 +73,9 @@ public class User implements Serializable {
 		return tel;
 	}
 
-
-
 	public void setTel(String tel) {
 		this.tel = tel;
 	}
-
-
 
 	public int getId() {
 		return id;
@@ -116,11 +96,9 @@ public class User implements Serializable {
 		this.password = BCryptManagerUtil.passwordEncoder().encode(password);
 	}
 
-
-
 	@Override
 	public String toString() {
-		return "{id:" + id + ", username:" + username + ", Adresse:" + Adresse + ", tel:" + tel + ", role:" + role
+		return "{id:" + id + ", username:" + username + ", adresse:" + adresse + ", emai:"+email+", tel:" + tel + ", role:" + role
 				+ "}";
 	}
 	

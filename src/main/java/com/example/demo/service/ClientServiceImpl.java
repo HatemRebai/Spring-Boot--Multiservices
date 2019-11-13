@@ -26,13 +26,17 @@ public class ClientServiceImpl implements ClienttService {
 		clientrepository.delete(client);
 	}
 	@Override
-	public Client getclientById(Integer id) {
+	public Client getclientById(int id) {
 		return  clientrepository.getOne(id);
 		
 	}
 	@Override
 	public List<Client> getall() {
 		return clientrepository.findAll();
+	}
+	@Override
+	public void saveUserClient(Client client) {
+		clientrepository.save(client);
 	}
 	
 	
