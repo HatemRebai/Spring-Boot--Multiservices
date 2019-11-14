@@ -9,6 +9,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
@@ -21,30 +22,40 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 @Autowired
 private JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
 
-@Autowired
-private JwtRequestFilter jwtRequestFilter;
+//@Autowired
+//private JwtRequestFilter jwtRequestFilter;
+
+//@Autowired 
+//UserDetailsService userDetailservice;
+
 @Autowired
 public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
 // configure AuthenticationManager so that it knows from where to load
 // user for matching credentials
 // Use BCryptPasswordEncoder
-// auth.userDetailsService(jwtUserDetailsService).passwordEncoder(passwordEncoder());
+ //auth.userDetailsService(this.userDetailservice).passwordEncoder(passwordEncoder());
 }
-@Bean
+/*@Bean
 public PasswordEncoder passwordEncoder() {
 return new BCryptPasswordEncoder();
-}
+}*/
 @Bean
 @Override
 public AuthenticationManager authenticationManagerBean() throws Exception {
 return super.authenticationManagerBean();
 }
+@Autowired
+JwtRequestFilter jwtRequestFilter;
+//@Bean
+//public JwtRequestFilter jwtRequestFilterBean(){
+	//return new JwtRequestFilter();
+
 @Override
 protected void configure(HttpSecurity httpSecurity) throws Exception {
 // We don't need CSRF for this example
 httpSecurity.csrf().disable()
 // dont authenticate this particular request
-.authorizeRequests().antMatchers("/user/add","/user/addouv", "/user/login","/service/updateservices/{id}","/service/deleteservices/{id}").permitAll().
+.authorizeRequests().antMatchers("/user/add","/user/decrypt","/user/addouv", "/user/login","/service/updateservices/{id}","/service/deleteservices/{id}","/user/pwdCheck").permitAll().
 // all other requests need to be authenticated
 anyRequest().authenticated().and().
 // make sure we use stateless session; session won't be used to

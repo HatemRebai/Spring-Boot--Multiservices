@@ -25,4 +25,7 @@ public class BCryptManagerUtil {
 	public PasswordEncoder getPasswordEncoder() {
 		return passwordEncoder;
 	}
-}
+
+		
+	}
+

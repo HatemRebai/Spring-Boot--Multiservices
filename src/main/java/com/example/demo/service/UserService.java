@@ -10,4 +10,8 @@ public interface UserService {
 	public void saveUser( Client user);
 	public void saveOuvrier( Ouvrier user);
 	public User loadByUsername(String username);
+	public User loadByEmail(String email);	
+	
+	
+
 }
