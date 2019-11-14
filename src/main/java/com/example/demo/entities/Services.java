@@ -1,6 +1,8 @@
 package com.example.demo.entities;
 
 import java.io.Serializable;
+import java.sql.Date;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -21,35 +23,67 @@ public class Services implements Serializable {
 	private int id;
 	private String titre;
 	private String decription;
-	private String price  ;
-	
+	private Date date  ;
+
+
+
+	@JoinColumn(name = "idclient") 
+	@JsonIgnore
+	@ManyToOne 
+	private Client client ;
 	
 	@JoinColumn(name = "idouvrier") 
-	@JsonIgnore
 	@ManyToOne 
 	private Ouvrier ouvrier ;
 
 	
+	
+		public Client getClient() {
+		return client;
+	}
+
+
+	public void setClient(Client client) {
+		this.client = client;
+	}
+
+
+		public Ouvrier getOuvrier() {
+		return ouvrier;
+	}
+
+
+	public void setOuvrier(Ouvrier ouvrier) {
+		this.ouvrier = ouvrier;
+	}
+
+
 		public Services() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
 
-		public Services(int id, String titre, String decription, String price, Ouvrier ouvrier) {
+	
+
+
+
+
+		public Services(int id, String titre, String decription, Date date, Client client, Ouvrier ouvrier) {
 			super();
 			this.id = id;
 			this.titre = titre;
 			this.decription = decription;
-			this.price = price;
+			this.date = date;
+			this.client = client;
 			this.ouvrier = ouvrier;
 		}
 
 
 		@Override
 		public String toString() {
-			return "Service [id=" + id + ", titre=" + titre + ", decription=" + decription + ", price=" + price
-					+ ", ouvrier=" + ouvrier + "]";
+			return "Services [id=" + id + ", titre=" + titre + ", decription=" + decription + ", date=" + date
+					+ ", client=" + client + ", ouvrier=" + ouvrier + "]";
 		}
 
 
@@ -83,25 +117,12 @@ public class Services implements Serializable {
 		}
 
 
-		public String getPrice() {
-			return price;
+		public Date getDate() {
+			return date;
 		}
 
 
-		public void setPrice(String price) {
-			this.price = price;
+		public void setDate(Date date) {
+			this.date = date;
 		}
-
-
-		public Ouvrier getOuvrier() {
-			return ouvrier;
-		}
-
-
-		public void setOuvrier(Ouvrier ouvrier) {
-			this.ouvrier = ouvrier;
-		}
-
-
-
 	}

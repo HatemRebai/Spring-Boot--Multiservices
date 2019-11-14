@@ -6,7 +6,6 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -19,15 +18,15 @@ public class Ouvrier extends User implements Serializable {
 	
 	private float Moyenne;
 	private Typedouvrier type;
-	
-	@OneToMany(mappedBy="ouvrier", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	private List<Services> service = new ArrayList<Services>();
 
 		
 	@OneToMany(mappedBy="ouvriers", cascade = CascadeType.ALL)
 	@JsonIgnore
 	private List<Comments> comments = new ArrayList<Comments>();
 
+	@OneToMany(mappedBy="ouvrier", cascade = CascadeType.ALL)
+	@JsonIgnore
+	private List<Services> services = new ArrayList<Services>();
 
 	public float getMoyenne() {
 		return Moyenne;

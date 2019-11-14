@@ -55,7 +55,11 @@ protected void configure(HttpSecurity httpSecurity) throws Exception {
 // We don't need CSRF for this example
 httpSecurity.csrf().disable()
 // dont authenticate this particular request
+<<<<<<< HEAD
 .authorizeRequests().antMatchers("/user/add","/user/decrypt","/user/addouv", "/user/login","/service/updateservices/{id}","/service/deleteservices/{id}","/user/pwdCheck").permitAll().
+=======
+.authorizeRequests().antMatchers("/ouvrier/allclient","/client/allclient","/client/oneclient/{id}","/client/add","/ouvrier/allouvrier","/user/add","/user/addouv", "/user/login","/service/updateservices/{id}","/service/deleteservices/{id}", "/ouvrier/deleteouvrier/{id}","/client/deleteclient/{id}","/service/reserveservice","/client/add/{idServices}","/service/addservice/{idclient}").permitAll().
+>>>>>>> 4b7f787ae84bb69b4c47c726f1a3819beb07ffd8
 // all other requests need to be authenticated
 anyRequest().authenticated().and().
 // make sure we use stateless session; session won't be used to
@@ -63,6 +67,7 @@ anyRequest().authenticated().and().
 exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint).and().sessionManagement()
 .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 // Add a filter to validate the tokens with every request
+httpSecurity.cors();
 httpSecurity.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
 }
 
