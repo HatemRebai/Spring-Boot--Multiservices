@@ -1,12 +1,11 @@
 package com.example.demo.entities;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.OneToMany;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
 import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -16,36 +15,44 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 public class Ouvrier extends User implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
-	private float Moyenne;
-	private Typedouvrier type;
+	
+	private boolean available ;
+	private Typedouvrier type;	
 
-		
-	@OneToMany(mappedBy="ouvriers", cascade = CascadeType.ALL)
+	
 	@JsonIgnore
-	private List<Comments> comments = new ArrayList<Comments>();
-
-	@OneToMany(mappedBy="ouvrier", cascade = CascadeType.ALL)
-	@JsonIgnore
-	private List<Services> services = new ArrayList<Services>();
-
-	public float getMoyenne() {
-		return Moyenne;
+	@JoinColumn(name = "idService") 
+	@ManyToOne 
+	private Services service ;
+	
+	public Ouvrier() {
+		super();
+		// TODO Auto-generated constructor stub
 	}
 
-
-	public void setMoyenne(float moyenne) {
-		Moyenne = moyenne;
+	public Ouvrier(boolean available, Typedouvrier type, Services service) {
+		super();
+		this.available = available;
+		this.type = type;
+		this.service = service;
 	}
-
-
+	public Services getService() {
+		return service;
+	}
+	public void setService(Services service) {
+		this.service = service;
+	}
 	public Typedouvrier getType() {
 		return type;
 	}
-
-
 	public void setType(Typedouvrier type) {
 		this.type = type;
 	}
+	public boolean isAvailable() {
+		return available;
+	}
+	public void setAvailable(boolean available) {
+		this.available = available;
+	}
 
-	
 	}

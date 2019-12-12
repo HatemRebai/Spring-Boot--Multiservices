@@ -12,9 +12,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.entities.Client;
 import com.example.demo.entities.Services;
+import com.example.demo.entities.User;
 import com.example.demo.repositories.ClientRepository;
 import com.example.demo.repositories.ServicesRepository;
 import com.example.demo.service.ClienttService;
+import com.example.demo.service.UserService;
 
 @CrossOrigin("*")
 @RestController
@@ -28,6 +30,8 @@ public class ClientController {
 	
 	@Autowired
 	ClientRepository clientrepository;
+	@Autowired
+	UserService userservice;
 	
 	@RequestMapping(value="/add",method=RequestMethod.POST)
 	public void saveUser(@RequestBody Client client) {
@@ -51,4 +55,5 @@ public class ClientController {
 		Client c =clientservice.getclientById(id);
 		return c;
 	}
+	
 }

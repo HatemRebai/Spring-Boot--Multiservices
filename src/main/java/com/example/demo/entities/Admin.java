@@ -8,28 +8,27 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class Admin implements Serializable {
+public class Admin extends User implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 	 @Id
 	 @GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 	private String username;
-
 	private String email;
-	private String mdp  ;
+	private String password  ;
 	public Admin() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 	
 	
-	public Admin(int id, String username, String email, String mdp) {
+	public Admin(int id, String username, String email, String password) {
 		super();
 		this.id = id;
 		this.username = username;
 		this.email = email;
-		this.mdp = mdp;
+		this.password = password;
 	}
 
 
@@ -55,13 +54,15 @@ public class Admin implements Serializable {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public String getMdp() {
-		return mdp;
+
+
+	public String getPassword() {
+		return password;
 	}
-	public void setMdp(String mdp) {
-		this.mdp = mdp;
+
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
-	
-	
 
 }

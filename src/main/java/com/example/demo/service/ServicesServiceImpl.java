@@ -1,9 +1,14 @@
 package com.example.demo.service;
 
 
-import org.springframework.beans.factory.annotation.Autowired;
+import java.util.List;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
+import org.springframework.beans.factory.annotation.Autowired;
 import com.example.demo.entities.Services;
+import com.example.demo.entities.User;
 import com.example.demo.repositories.OuvrierRepository;
 import com.example.demo.repositories.ServicesRepository;
 import org.springframework.stereotype.Service;
@@ -15,6 +20,8 @@ public class ServicesServiceImpl  implements ServicesService{
 	ServicesRepository servicesrepository;
 	@Autowired
 	OuvrierRepository ouvrierrepository;
+	@PersistenceContext
+	EntityManager em;
 	
 	@Override
 	public void addservice(Services services) {
@@ -26,12 +33,27 @@ public class ServicesServiceImpl  implements ServicesService{
 		servicesrepository.delete(services);
 	}
 
-
 	@Override
 	public void updateservices(Services services) {
-		// TODO Auto-generated method stub
 		servicesrepository.save(services);
 
 	}
+
+	@Override
+	public Services getServiceByUserEmail(String Email) {
+		User u = new User();
+		Email = u.getEmail();
+		return null;
+	}
+
+	@Override
+	public Services getServiceById(Integer id) {
+		return	servicesrepository.getOne(id);
+	}
+	@Override
+	public List<Services> getAll() {
+		return servicesrepository.findAll();
+	}
+
 	
 }

@@ -5,20 +5,26 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.demo.config.BCryptManagerUtil;
 import com.example.demo.entities.Client;
+import com.example.demo.entities.User;
 import com.example.demo.repositories.ClientRepository;
+
 
 
 @Service("clientservice")
 public class ClientServiceImpl implements ClienttService {
 
 	
+	private BCryptManagerUtil passwordEncoder;
+	
 	@Autowired
 	ClientRepository clientrepository;
+	
 	@Override
 	public void saveUser(Client client) {
-		clientrepository.save(client);
-		
+		client.setPassword(BCryptManagerUtil.passwordEncoder().encode(client.getPassword()));
+		clientrepository.save(client);	
 	}
 	@Override
 	public void suppclient(Client client) {

@@ -6,8 +6,12 @@ import com.example.demo.entities.Ouvrier;
 
 public interface OuvrierService {
 	
-	public void saveUser( Ouvrier ouvrier);
+	
 	public void suppouvrier(Ouvrier ouvrier);
 	public Ouvrier getouvrierById(Integer id);
 	public List<Ouvrier> getall();
+	public List<Ouvrier> getAvailable(boolean available);
+	public List<Ouvrier> getNotAvailable(boolean available);
+	public void setEtatOuvrier (Ouvrier ouvrier);
+	public void save(Ouvrier ouvrier);
 }

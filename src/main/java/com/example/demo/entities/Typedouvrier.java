@@ -5,5 +5,5 @@ public enum Typedouvrier {
  Electricien,
  Maçon,
  Plombier,
- Peintre,
+ Peinture,
 }

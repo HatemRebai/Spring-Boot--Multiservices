@@ -8,6 +8,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.ReactiveAuthenticationManagerAdapter;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -20,7 +21,9 @@ import com.example.demo.entities.Client;
 import com.example.demo.entities.JwtResponse;
 import com.example.demo.entities.Ouvrier;
 import com.example.demo.entities.Role;
+import com.example.demo.entities.Services;
 import com.example.demo.entities.User;
+import com.example.demo.repositories.ServicesRepository;
 import com.example.demo.service.UserService;
 
 @CrossOrigin("*")
@@ -34,6 +37,8 @@ public class UserController {
 	private AuthenticationManager authenticationManager;
 	
 	@Autowired
+	ServicesRepository servicesrepository;
+	@Autowired
 	private JwtTokenUtil jwtTokenUtil;
 	
 	@RequestMapping(value="/add",method=RequestMethod.POST)
@@ -41,18 +46,18 @@ public class UserController {
 		user.setRole(Role.client);
 		userservice.saveUser(user);	
 	}
-	@RequestMapping(value="/addouv",method=RequestMethod.POST)
-	public void saveUser(@RequestBody Ouvrier user) {
+	@RequestMapping(value="/addouv{idServices}",method=RequestMethod.POST)
+	public void saveUser(@RequestBody Ouvrier user, @PathVariable("idServices") int idServices) {
+		Services f = servicesrepository.getOne(idServices);
+		user.setService(f);
+		user.setAvailable(true);
 		user.setRole(Role.ouvrier);
 		userservice.saveOuvrier(user);
 		
 	}
-	
-
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public ResponseEntity<?> createAuthenticationToken(@RequestBody User u) throws Exception {
 	String cryptpwd= userservice.loadByEmail(u.getEmail()).getPassword();
-	
 	 boolean pwd = BCryptManagerUtil.passwordEncoder().matches(u.getPassword(),cryptpwd);
 	 if(pwd == true) {
 		 final User userDetails = userservice.loadByEmail(u.getEmail());
@@ -80,7 +85,10 @@ public class UserController {
 		
 		return ("password apres encode = "+ pwdencode +"     password = " + password +"     password crypter de la base = "+ pwdcrypt +"     Resultat du Matches est = "+ pwd)  ;
 	}
+	@RequestMapping(value = "getUserId" , method = RequestMethod.GET)
+	private String GetId(@RequestBody User U) {
+		
+		return null;	
+	}
 }
 	
-
-

@@ -9,12 +9,13 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
+
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-@Configuration
+
+
+
 @EnableWebSecurity
+@Configuration
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	
@@ -53,19 +54,27 @@ JwtRequestFilter jwtRequestFilter;
 @Override
 protected void configure(HttpSecurity httpSecurity) throws Exception {
 // We don't need CSRF for this example
-httpSecurity.csrf().disable()
+httpSecurity
+.csrf().disable()
 // dont authenticate this particular request
-<<<<<<< HEAD
-.authorizeRequests().antMatchers("/user/add","/user/decrypt","/user/addouv", "/user/login","/service/updateservices/{id}","/service/deleteservices/{id}","/user/pwdCheck").permitAll().
-=======
-.authorizeRequests().antMatchers("/ouvrier/allclient","/client/allclient","/client/oneclient/{id}","/client/add","/ouvrier/allouvrier","/user/add","/user/addouv", "/user/login","/service/updateservices/{id}","/service/deleteservices/{id}", "/ouvrier/deleteouvrier/{id}","/client/deleteclient/{id}","/service/reserveservice","/client/add/{idServices}","/service/addservice/{idclient}").permitAll().
->>>>>>> 4b7f787ae84bb69b4c47c726f1a3819beb07ffd8
+
+//.authorizeRequests().antMatchers("/user/add","/user/decrypt","/user/addouv", "/user/login","/service/updateservices/{id}","/service/deleteservices/{id}","/user/pwdCheck").permitAll().
+
+.authorizeRequests().antMatchers("/reservation/reserveClt/{idclient}","/reservation/reserveServ/{id}","/reservation/reserveOuv/{id}","/reservation/finishReservation/{id}","/reservation/getinitial","/reservation/getencours","/reservation/getterminer","/reservation/validateReservation/{id}","/ouvrier/update/{id}","/ouvrier/getOne/{id}","/ouvrier/available","/client/getClt/{email}","/client/allclient","/client/oneclient/{id}","/client/add","/ouvrier/allouvrier","/user/add","/ouvrier/add/{id}","/ouvrier/update" , "/user/login","/service/updateservices/{id}","/service/deleteservices/{id}", "/ouvrier/deleteouvrier/{id}","/client/deleteclient/{id}","/service/reserveservice","/client/add/{idServices}","/service/addservice/{idclient}","/service/allservice").permitAll().
+//.authorizeRequests().antMatchers("/user/add","/user/login").permitAll().
 // all other requests need to be authenticated
+
+
 anyRequest().authenticated().and().
 // make sure we use stateless session; session won't be used to
 // store user's state.
-exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint).and().sessionManagement()
-.sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+
+exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint)
+
+
+.and()
+// don't create session (REST)
+.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 // Add a filter to validate the tokens with every request
 httpSecurity.cors();
 httpSecurity.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
