@@ -47,7 +47,7 @@ public class ServicesController {
 		return servicesservice.getAll();
 
 	}
-    @RequestMapping(value="/addservice", method=RequestMethod.POST)
+    @RequestMapping(value="/add", method=RequestMethod.POST)
     public void addservice(@RequestBody Services services) {
     	servicesservice.addservice(services); 	
     }

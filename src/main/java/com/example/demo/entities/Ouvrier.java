@@ -3,11 +3,13 @@ package com.example.demo.entities;
 import java.io.Serializable;
 
 import javax.persistence.Entity;
+
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 @Entity
 @Table(name = "files")
@@ -21,7 +23,7 @@ public class Ouvrier extends User implements Serializable {
 
 	
 	@JsonIgnore
-	@JoinColumn(name = "idService") 
+	@JoinColumn(name = "idService" ) 
 	@ManyToOne 
 	private Services service ;
 	
@@ -53,6 +55,11 @@ public class Ouvrier extends User implements Serializable {
 	}
 	public void setAvailable(boolean available) {
 		this.available = available;
+	}
+
+	@Override
+	public String toString() {
+		return "Ouvrier [available=" + available + ", type=" + type + ", service=" + service + "]";
 	}
 
 	}

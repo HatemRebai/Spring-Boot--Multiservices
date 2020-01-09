@@ -51,7 +51,7 @@ public class ServicesServiceImpl  implements ServicesService{
 		return	servicesrepository.getOne(id);
 	}
 	@Override
-	public List<Services> getAll() {
+	public List<Services>getAll() {
 		return servicesrepository.findAll();
 	}
 

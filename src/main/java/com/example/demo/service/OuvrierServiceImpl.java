@@ -40,7 +40,9 @@ public class OuvrierServiceImpl implements OuvrierService {
 
 	@Override
 	public List<Ouvrier> getall() {
-		return ouvrierrepository.findAll();
+		//return ouvrierrepository.findAll();
+		TypedQuery<Ouvrier> query  = em.createQuery("SELECT o FROM Ouvrier o ", Ouvrier.class);
+		return query.getResultList();
 	}
 
 	@Override

@@ -12,7 +12,8 @@ public interface UserService {
 	public void saveOuvrier( Ouvrier user);
 	public User loadByUsername(String username);
 	public User loadByEmail(String email);
-	void saveAdmin(Admin user);	
+	void saveAdmin(Admin user);
+	public void savAdmin(Admin user);	
 	
 	
 

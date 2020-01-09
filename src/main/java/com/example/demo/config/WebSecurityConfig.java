@@ -60,8 +60,8 @@ httpSecurity
 
 //.authorizeRequests().antMatchers("/user/add","/user/decrypt","/user/addouv", "/user/login","/service/updateservices/{id}","/service/deleteservices/{id}","/user/pwdCheck").permitAll().
 
-.authorizeRequests().antMatchers("/reservation/reserveClt/{idclient}","/reservation/reserveServ/{id}","/reservation/reserveOuv/{id}","/reservation/finishReservation/{id}","/reservation/getinitial","/reservation/getencours","/reservation/getterminer","/reservation/validateReservation/{id}","/ouvrier/update/{id}","/ouvrier/getOne/{id}","/ouvrier/available","/client/getClt/{email}","/client/allclient","/client/oneclient/{id}","/client/add","/ouvrier/allouvrier","/user/add","/ouvrier/add/{id}","/ouvrier/update" , "/user/login","/service/updateservices/{id}","/service/deleteservices/{id}", "/ouvrier/deleteouvrier/{id}","/client/deleteclient/{id}","/service/reserveservice","/client/add/{idServices}","/service/addservice/{idclient}","/service/allservice").permitAll().
-//.authorizeRequests().antMatchers("/user/add","/user/login").permitAll().
+//.authorizeRequests().antMatchers("/reservation/reserveClt/{idclient}","/reservation/reserveServ/{id}","/reservation/reserveOuv/{id}","/reservation/finishReservation/{id}","/reservation/getinitial","/reservation/getencours","/reservation/getterminer","/reservation/validateReservation/{id}","/ouvrier/update/{id}","/ouvrier/getOne/{id}","/ouvrier/available","/ouvrier/notavailable","/client/allclient","/client/oneclient/{id}","/client/add","/ouvrier/allouvrier","/user/add","/ouvrier/add/{id}","/ouvrier/update" , "/user/login","/service/updateservices/{id}","/service/deleteservices/{id}", "/ouvrier/deleteouvrier/{id}","/client/deleteclient/{id}","/service/reserveservice","/service/adds","/service/allservice").permitAll().
+.authorizeRequests().antMatchers("/user/**","/service/**","/ouvrier/**", "/reservation/**","/client/**").permitAll().
 // all other requests need to be authenticated
 
 

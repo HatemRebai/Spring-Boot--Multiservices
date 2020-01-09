@@ -48,11 +48,14 @@ public class ReservationController {
 		return reservationservice.getAll();
 	}
 	
-    @RequestMapping(value="/reserveClt/{idclient}", method=RequestMethod.POST)
-    public void addClienttoReservation(@RequestBody Reservation reservation, @PathVariable("idclient") Integer idclient) {
+    @RequestMapping(value="/reserveClt/{id}", method=RequestMethod.POST)
+    public void addClienttoReservation(@RequestBody Reservation reservation, @PathVariable("id") Integer id, 
+    		@RequestParam (value = "idserv", required = true) Integer idserv) {
     
-    	Client c = clientservice.getclientById(idclient);
+    	Client c = clientservice.getclientById(id);
+    	Services s = serviceservice.getServiceById(idserv);
     	reservation.setClient(c);
+    	reservation.setService(s);
     	reservation.setEtat("initial");
     	reservationservice.addservice(reservation); 	
     }
@@ -66,7 +69,8 @@ public class ReservationController {
     }
     
     @RequestMapping(value="/reserveOuv/{id}", method=RequestMethod.GET)
-    public void addOuvrierToResrvation(@PathVariable("id") Integer id , @RequestParam (value = "idouv", required = true) Integer idouv) {
+    public void addOuvrierToResrvation(@PathVariable("id") Integer id , 
+    		@RequestParam (value = "idouv", required = true) Integer idouv) {
   
     	Reservation reservation = reservationservice.getReservationById(id);
     	Ouvrier o = ouvrierservice.getouvrierById(idouv);

@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.config.BCryptManagerUtil;
 import com.example.demo.config.JwtTokenUtil;
+import com.example.demo.entities.Admin;
 import com.example.demo.entities.Client;
 import com.example.demo.entities.JwtResponse;
 import com.example.demo.entities.Ouvrier;
@@ -46,6 +47,11 @@ public class UserController {
 		user.setRole(Role.client);
 		userservice.saveUser(user);	
 	}
+	@RequestMapping(value="/addAdmin",method=RequestMethod.POST)
+	public void saveUser(@RequestBody Admin user) {
+		user.setRole(Role.admin);
+		userservice.saveAdmin(user);	
+	}
 	@RequestMapping(value="/addouv{idServices}",method=RequestMethod.POST)
 	public void saveUser(@RequestBody Ouvrier user, @PathVariable("idServices") int idServices) {
 		Services f = servicesrepository.getOne(idServices);
@@ -55,16 +61,32 @@ public class UserController {
 		userservice.saveOuvrier(user);
 		
 	}
+	@RequestMapping(value = "/admin", method = RequestMethod.POST)
+	public ResponseEntity<?> createAuthenticationAdminToken(@RequestBody User u) throws Exception {
+	String cryptpwd= userservice.loadByEmail(u.getEmail()).getPassword();
+	 
+	 boolean pwd = BCryptManagerUtil.passwordEncoder().matches(u.getPassword(),cryptpwd);
+	 final User userDetails = userservice.loadByEmail(u.getEmail());
+	 final String token = jwtTokenUtil.generateToken(userDetails);
+	 
+	 if(pwd == true && userDetails.getRole() == Role.admin ) {
+			return ResponseEntity.ok(new JwtResponse(token));
+	 }
+	     return ResponseEntity.of(null);
+	}
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public ResponseEntity<?> createAuthenticationToken(@RequestBody User u) throws Exception {
 	String cryptpwd= userservice.loadByEmail(u.getEmail()).getPassword();
+	 
 	 boolean pwd = BCryptManagerUtil.passwordEncoder().matches(u.getPassword(),cryptpwd);
-	 if(pwd == true) {
-		 final User userDetails = userservice.loadByEmail(u.getEmail());
-		 final String token = jwtTokenUtil.generateToken(userDetails);
+	 
+	 final User userDetails = userservice.loadByEmail(u.getEmail());
+	 final String token = jwtTokenUtil.generateToken(userDetails);
+	 
+	 if(pwd == true && userDetails.getRole() == Role.client) {
 			return ResponseEntity.ok(new JwtResponse(token));
 	 }
-	return ResponseEntity.of(null);
+	     return ResponseEntity.of(null);
 	}
 	/*private void authenticate(String email, String password) throws Exception {
 		try {

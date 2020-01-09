@@ -23,13 +23,14 @@ public class Services implements Serializable {
 	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	
 	private int id;
 	private String titre;
 	private String description;
 
 	
 	@JsonIgnore
-	@OneToMany(mappedBy="service",fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@OneToMany(mappedBy="service",fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<Ouvrier> Ouvrier = new ArrayList<Ouvrier>();
 	
 		public int getId() {
@@ -68,7 +69,6 @@ public class Services implements Serializable {
 		// TODO Auto-generated constructor stub
 	}
 
-
 	public Services(int id, String titre, String description, Date date, String etat,
 			List<com.example.demo.entities.Ouvrier> ouvrier) {
 		super();
@@ -77,8 +77,6 @@ public class Services implements Serializable {
 		this.description = description;
 		Ouvrier = ouvrier;
 	}
-
-
 	@Override
 	public String toString() {
 		return "Services [id=" + id + ", titre=" + titre + ", description=" + description + ", Ouvrier=" + Ouvrier + "]";

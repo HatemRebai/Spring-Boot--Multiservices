@@ -35,10 +35,8 @@ public class ClientController {
 	
 	@RequestMapping(value="/add",method=RequestMethod.POST)
 	public void saveUser(@RequestBody Client client) {
-		clientservice.saveUser(client);
-		
+		clientservice.saveUser(client);	
 	}
-	
 	@RequestMapping(value="/deleteclient/{id}",method=RequestMethod.DELETE)
 	public void deleteclient(@PathVariable("id") Integer id) {
 		Client c = clientservice.getclientById(id);
